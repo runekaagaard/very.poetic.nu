@@ -1,0 +1,45 @@
+<!doctype html>  
+<html> 
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" >
+        <meta charset="utf-8"> 
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+        <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssreset/reset-min.css" /> 
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssbase/base-min.css" /> 
+        <link rel="stylesheet" type="text/css" href="css/main.css" /> 
+        
+        <title>{% block title %}Very Poetic{% endblock %}</title>
+
+        <style>
+          body {
+              color: #555;
+              margin: 0px auto 0px auto;
+              width: 450px;
+          }
+
+          a {
+              color: #519A9A;
+          }
+        </style>
+    </head>
+
+    <body> 
+        
+        <nav> 
+            <a href="/">All</a> - 
+            <a href="/random">Random</a>
+            {% block nav %}{% endblock %}
+        </nav>
+        
+        <header>
+          <h1>Very Poetic</h1>
+        </header>
+        
+        <article>
+          {% block article %}{% endblock %}
+        </article>
+    </body> 
+</html> 

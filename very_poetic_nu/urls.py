@@ -7,6 +7,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'very_poetic_nu.poems.views.index', name='index'),
+    url(r'^([0-9]+)$', 'very_poetic_nu.poems.views.poem', name='poem'),
     # url(r'^very_poetic_nu/', include('very_poetic_nu.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
