@@ -4,10 +4,8 @@
 	{% regroup poems by author as author_list %}
 	{% for author in author_list %}
 		<h1>{{author.grouper}}</h1>
-		<ul>
 		{% for poem in author.list %}
-			<li>{{poem.title}}</li>
+			<a href="{{poem.pk}}">{{poem.title}}</a>&nbsp;
 		{% endfor %}
-		</ul>
     {% endfor %}
 {% endblock %}

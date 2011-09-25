@@ -20,26 +20,49 @@
               width: 450px;
           }
 
+          h1 {
+            margin-bottom: 0;  
+          }
+
+          h2 {
+            color: black;
+          }
+
           a {
               color: #519A9A;
           }
+
+          .author {
+            font-size: 0.8em;
+            margin-bottom: 20px;
+          }
+
+          .poem_title {
+            line-height: 0.8em;
+            padding-bottom: 0;
+            margin-bottom: 1px;
+          }
+
         </style>
     </head>
 
     <body> 
         
         <nav> 
-            <a href="/">All</a> - 
+            <a href="/">Front</a> - 
             <a href="/random">Random</a>
             {% block nav %}{% endblock %}
         </nav>
         
         <header>
           <h1>Very Poetic</h1>
+          <hr />
         </header>
         
         <article>
           {% block article %}{% endblock %}
         </article>
+
+        {% block footer %}{% endblock %}
     </body> 
 </html> 
