@@ -1,0 +1,33 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html> 
+    <head> 
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssreset/reset-min.css" /> 
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.3.0/build/cssbase/base-min.css" /> 
+        <link rel="stylesheet" type="text/css" href="css/main.css" /> 
+        <title>Very Poetic</title> 
+    </head> 
+    <body> 
+        
+        <div> 
+            <a href="/list">List</a> - 
+            <a href="/1">Random</a> 
+                         - <a href="2">>></a>            
+        </div> 
+        <h1>Very Poetic</h1> 
+        <hr /> 
+        <div id="content">
+            {% for poem in poems %}
+            	{% ifchanged poem.author %}
+            		<h1>{{poem.author}}</h1>
+            		<ul>
+            	{% endifchanged %}
+            	<li>{{poem.title}}</li>
+            	{% ifchanged poem.author %}</ul>{% endifchanged %}
+            {% endfor %}
+            </ul>
+        </div> 
+    </body> 
+</html> 
