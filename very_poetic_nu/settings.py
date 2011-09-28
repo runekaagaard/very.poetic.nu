@@ -102,6 +102,13 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend', # default
+    'guardian.backends.ObjectPermissionBackend',
+)
+
+ANONYMOUS_USER_ID = -1
+
 ROOT_URLCONF = 'very_poetic_nu.urls'
 
 TEMPLATE_DIRS = (
@@ -123,6 +130,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
+    'guardian',
 )
 
 # A sample logging configuration. The only tangible logging

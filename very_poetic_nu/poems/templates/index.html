@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block article %}
-	{% regroup poems by author as author_list %}
+	{% regroup poems by user as author_list %}
 	{% for author in author_list %}
 		<h1>{{author.grouper}}</h1>
 		{% for poem in author.list %}

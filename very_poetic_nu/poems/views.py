@@ -5,9 +5,11 @@ from itertools import groupby
 from django.core.exceptions import ObjectDoesNotExist
 
 def index(request):
-	poems = Poem.objects.select_related().order_by('author__id').all()
+	poems = Poem.objects.select_related().order_by('user__id').all()
 	return render_to_response("poems/templates/index.html", {
-		'poems': Poem.objects.select_related().order_by('author__id').all()})
+		'poems': poems,
+		'request': request,
+	})
 
 def poem(request, pk):
 	pk = int(pk)
@@ -24,7 +26,7 @@ def poem(request, pk):
 	return render_to_response("poems/templates/poem.html", {
 		'poem': poem,
 		'poem_to_left': poem_to_left,
-		'poem_to_right': poem_to_right,
+		'poem_to_right': poem_to_right, 
 	})
 
 def random(request):

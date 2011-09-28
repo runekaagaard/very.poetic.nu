@@ -52,6 +52,11 @@
             <a href="/">Front</a> - 
             <a href="/random">Random</a>
             {% block nav %}{% endblock %}
+            {%if request.user.is_authenticated%}
+              - <a href="/admin/poems/poem/add">Add poem</a>
+              - <a href="/admin/poems/poem">Administer poems</a>
+              - <a href="/admin/poems/poem">Log out</a>
+            {% endif %}
         </nav>
         
         <header>
