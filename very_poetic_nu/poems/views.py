@@ -6,7 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 def index(request):
 	poems = Poem.objects.select_related().order_by('user__id').all()
-	return render_to_response("poems/templates/index.html", {
+	return render_to_response("poems/index.html", {
 		'poems': poems,
 		'request': request,
 	})
@@ -23,10 +23,11 @@ def poem(request, pk):
 	except ObjectDoesNotExist:
 		poem_to_right=None
 	
-	return render_to_response("poems/templates/poem.html", {
+	return render_to_response("poems/poem.html", {
 		'poem': poem,
 		'poem_to_left': poem_to_left,
-		'poem_to_right': poem_to_right, 
+		'poem_to_right': poem_to_right,
+		'request': request,
 	})
 
 def random(request):

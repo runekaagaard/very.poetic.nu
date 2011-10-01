@@ -43,20 +43,56 @@
             margin-bottom: 1px;
           }
 
+          .admin {
+            color: grey;
+          }
+
+          .left {
+            float: left;
+          }
+
+          .right {
+            float: right;
+          }
+
+          /* For modern browsers */
+          .cf:before,
+          .cf:after {
+              content:"";
+              display:table;
+          }
+
+          .cf:after {
+              clear:both;
+          }
+
+          /* For IE 6/7 (trigger hasLayout) */
+          .cf {
+              zoom:1;
+          }
+
         </style>
     </head>
 
     <body> 
         
-        <nav> 
-            <a href="/">Front</a> - 
-            <a href="/random">Random</a>
-            {% block nav %}{% endblock %}
-            {%if request.user.is_authenticated%}
-              - <a href="/admin/poems/poem/add">Add poem</a>
-              - <a href="/admin/poems/poem">Administer poems</a>
-              - <a href="/admin/poems/poem">Log out</a>
-            {% endif %}
+        <nav class="cf">
+            <div class="left">
+                <a href="/">Front</a> - 
+                <a href="/random">Random</a>
+              {% block nav_left %}{% endblock %}
+            </div>
+            <div class="right">
+              
+                {%if request.user.is_authenticated%}
+                    {% block nav_right %}{% endblock %}
+                    <a href="/admin/poems/poem/add" class="admin">Add poem</a>
+                  - <a href="/admin/logout" class="admin">Log out</a>
+                {% else %}
+                  <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}" class="admin">Log in</a>
+                {% endif %}
+              
+            </div>
         </nav>
         
         <header>

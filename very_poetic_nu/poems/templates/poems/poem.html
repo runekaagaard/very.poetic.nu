@@ -1,6 +1,6 @@
-{% extends "base.html" %}
+{% extends "poems/base.html" %}
  
-{% block nav %}
+{% block nav_left %}
     {% if poem_to_left %}
         - <a href="/{{poem_to_left.pk}}"><<</a> 
     {% endif %}
@@ -8,6 +8,10 @@
         - <a href="/{{poem_to_right.pk}}">>></a>
     {% endif %}
     
+{% endblock %}
+
+{% block nav_right %}
+    <a href="/admin/poems/poem/{{poem.pk}}" class="admin">Edit poem</a> - 
 {% endblock %}
          
 {% block article %}
