@@ -11,7 +11,8 @@
 {% endblock %}
 
 {% block nav_right %}
-    <a href="/admin/poems/poem/{{poem.pk}}" class="admin">Edit poem</a> - 
+    <a href="{% url poems.views.edit poem.pk %}" class="admin">Edit</a> - 
+    <a href="{% url poems.views.delete poem.pk %}" class="admin">Delete</a> - 
 {% endblock %}
          
 {% block article %}

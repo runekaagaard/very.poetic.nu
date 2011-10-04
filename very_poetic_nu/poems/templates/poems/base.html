@@ -78,15 +78,15 @@
         
         <nav class="cf">
             <div class="left">
-                <a href="/">Front</a> - 
-                <a href="/random">Random</a>
+                <a href="{% url poems.views.index %}">Front</a> - 
+                <a href="{% url poems.views.random %}">Random</a>
               {% block nav_left %}{% endblock %}
             </div>
             <div class="right">
               
                 {%if request.user.is_authenticated%}
                     {% block nav_right %}{% endblock %}
-                    <a href="/admin/poems/poem/add" class="admin">Add poem</a>
+                    <a href="{% url poems.views.add %}" class="admin">New poem</a>
                   - <a href="/admin/logout" class="admin">Log out</a>
                 {% else %}
                   <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}" class="admin">Log in</a>
