@@ -71,6 +71,21 @@
               zoom:1;
           }
 
+          label {
+            display: block;
+            clear: both;
+            font-weight: bold;
+          }
+
+          .helptext {
+            display: block;
+            clear: both;
+          }
+          
+          textarea {
+            width: 100%;
+          }
+
         </style>
     </head>
 
@@ -87,7 +102,7 @@
                 {%if request.user.is_authenticated%}
                     {% block nav_right %}{% endblock %}
                     <a href="{% url poems.views.add %}" class="admin">New poem</a>
-                  - <a href="/admin/logout" class="admin">Log out</a>
+                  - <a href="{% url poems.views.logout %}" class="admin">Log out</a>
                 {% else %}
                   <a href="{% url django.contrib.auth.views.login %}?next={{request.path}}" class="admin">Log in</a>
                 {% endif %}

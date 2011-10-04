@@ -8,6 +8,7 @@ from itertools import groupby
 from django.core.exceptions import ObjectDoesNotExist
 from django.forms import ModelForm
 from django import forms
+from django.contrib.auth import logout as lgout
 
 def index(request):
 	poems = Poem.objects.select_related().order_by('user__id').all()
@@ -51,6 +52,7 @@ def edit(request, pk):
 		poem = get_object_or_404(Poem, pk=pk)
 	else:
 		poem = None
+	
 
 	if request.method == 'POST':
 		form = PoemForm(request.POST, instance=poem)
@@ -66,7 +68,6 @@ def edit(request, pk):
 def delete(request, pk):
 	poem = get_object_or_404(Poem, pk=pk)
 	if request.method == 'POST':
-		print request.POST
 		if 'confirm' in request.POST:
 			poem.delete()
 
@@ -74,3 +75,7 @@ def delete(request, pk):
 
 	return render_to_response('poems/delete.html', {}, 
 	                          RequestContext(request))
+
+def logout(request):
+  lgout(request)
+  return redirect('index')
