@@ -99,8 +99,10 @@
             </div>
             <div class="right">
               
-                {%if request.user.is_authenticated%}
-                    {% block nav_right %}{% endblock %}
+                {% if request.user.is_authenticated %}
+                    {% if user_owns_poem %}
+                      {% block nav_right %}{% endblock %}
+                    {% endif %}
                     <a href="{% url poems.views.add %}" class="admin">New poem</a>
                   - <a href="{% url poems.views.logout %}" class="admin">Log out</a>
                 {% else %}

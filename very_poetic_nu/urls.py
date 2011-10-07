@@ -10,11 +10,12 @@ urlpatterns = patterns('',
     # Examples:
     url(ur'^$', 'very_poetic_nu.poems.views.index', name='index'),
     url(ur'^([0-9]+)$', 'very_poetic_nu.poems.views.poem', name='poem'),
-    url(ur'^random$', 'very_poetic_nu.poems.views.random', name='random'),
-    url(ur'^bye$', 'very_poetic_nu.poems.views.logout', name='logout'),
-    url(ur'^\+$', 'very_poetic_nu.poems.views.add', name='add'),
-    url(ur'^([0-9]+)/e$', 'very_poetic_nu.poems.views.edit', name='edit'),
-    url(ur'^([0-9]+)/-$', 'very_poetic_nu.poems.views.delete', name='delete'),
+    url(ur'^¿$', 'very_poetic_nu.poems.views.random', name='random'),
+    url(ur'^←$', 'very_poetic_nu.poems.views.logout', name='logout'),
+    url(ur'^⊕$', 'very_poetic_nu.poems.views.add', name='add'),
+    url(ur'^([0-9]+)/Δ$', 'very_poetic_nu.poems.views.edit', name='edit'),
+    url(ur'^([0-9]+)/⊗$', 'very_poetic_nu.poems.views.delete', name='delete'),
+    url(ur'^([0-9]+)/⊗⊗$', 'very_poetic_nu.poems.views.restore', name='restore'),
     
 
     # Uncomment the admin/doc line below to enable admin documentation:
@@ -23,5 +24,5 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 
-    (r'^accounts/login/$', 'django.contrib.auth.views.login'),
+    (ur'^→/$', 'django.contrib.auth.views.login'),
 )

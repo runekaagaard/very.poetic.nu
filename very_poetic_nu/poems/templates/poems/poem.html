@@ -1,4 +1,6 @@
 {% extends "poems/base.html" %}
+
+{% block title %}Very Poetic | {{poem.title}}{% endblock %}
  
 {% block nav_left %}
     {% if poem_to_left %}

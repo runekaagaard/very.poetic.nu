@@ -1,17 +1,21 @@
 # coding=utf-8
+from itertools import groupby
 
 from django.shortcuts import (get_object_or_404, render_to_response, 
                               RequestContext, redirect)
-from django.http import HttpResponse, HttpResponseRedirect
-from very_poetic_nu.poems.models import Poem
-from itertools import groupby
+from django.http import (HttpResponse, HttpResponseRedirect, 
+                         HttpResponseForbidden)
 from django.core.exceptions import ObjectDoesNotExist
 from django.forms import ModelForm
 from django import forms
-from django.contrib.auth import logout as lgout
+from django.contrib.auth import logout as _logout
+
+from very_poetic_nu.poems.models import Poem
+
 
 def index(request):
-	poems = Poem.objects.select_related().order_by('user__id').all()
+	poems = Poem.objects.select_related().order_by(
+		                                    'user__id').filter(deleted=False)
 	return render_to_response("poems/index.html", {
 		'poems': poems,
 		'request': request,
@@ -34,6 +38,7 @@ def poem(request, pk):
 		'poem_to_left': poem_to_left,
 		'poem_to_right': poem_to_right,
 		'request': request,
+		'user_owns_poem': user_owns_poem(request, poem)
 	})
 
 def random(request):
@@ -46,18 +51,25 @@ class PoemForm(ModelForm):
 def add(request):
 	return edit(request, None)
 
+def user_owns_poem(request, poem):
+	return poem.user == request.user
+
 def edit(request, pk):
 	if pk is not None:
-		pk = int(pk)
-		poem = get_object_or_404(Poem, pk=pk)
+		poem = get_object_or_404(Poem, pk=int(pk))
+		if not user_owns_poem(request, poem):
+			return HttpResponseForbidden()
 	else:
 		poem = None
 	
-
 	if request.method == 'POST':
 		form = PoemForm(request.POST, instance=poem)
+		if pk is None:
+			form.instance.user = request.user
+
 		if form.is_valid():
 			form.save()
+
 			return redirect('poem', form.instance.pk)
 	else:
 		form = PoemForm(instance=poem)
@@ -67,15 +79,34 @@ def edit(request, pk):
 
 def delete(request, pk):
 	poem = get_object_or_404(Poem, pk=pk)
+	if not user_owns_poem(request, poem):
+			return HttpResponseForbidden()
+
 	if request.method == 'POST':
 		if 'confirm' in request.POST:
-			poem.delete()
+			poem.deleted = True
+			poem.save()
 
 		return redirect('index')
 
 	return render_to_response('poems/delete.html', {}, 
 	                          RequestContext(request))
 
+def restore(request, pk):
+	poem = get_object_or_404(Poem, pk=pk)
+	if not user_owns_poem(request, poem):
+			return HttpResponseForbidden()
+
+	if request.method == 'POST':
+		if 'confirm' in request.POST:
+			poem.deleted = False
+			poem.save()
+
+		return redirect('index')
+
+	return render_to_response('poems/restore.html', {}, 
+	                          RequestContext(request))
+
 def logout(request):
-  lgout(request)
+  _logout(request)
   return redirect('index')

@@ -1,0 +1,14 @@
+{% extends "poems/base.html" %}
+
+{% block title %}Very Poetic | {{poem.title}} | Restore{% endblock %}
+
+{% block article %}
+	<p>
+		Are you sure you want to restore this poem?
+	</p>
+    <form method="post">
+		{% csrf_token %}
+		<input type="submit" value="Restore" name="confirm"/>
+		<input type="submit" value="Cancel" />
+	</form>
+{% endblock %}

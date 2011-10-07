@@ -1,5 +1,7 @@
 {% extends "poems/base.html" %}
 
+{% block title %}Very Poetic | {{poem.title}} | Change{% endblock %}
+
 {% block article %}
     <form method="post">
 		{% csrf_token %}
