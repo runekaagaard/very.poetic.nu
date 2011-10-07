@@ -22,7 +22,7 @@
     <div class="author">by {{poem.user.username}}</a></div>
 
     <section>
-        {{poem.content|linebreaks}}
+        {{poem.content|safe|linebreaks}}
     </section>
 {% endblock %}
 
